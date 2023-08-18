@@ -2,7 +2,7 @@ import json
 import asyncio
 from concurrent.futures import ThreadPoolExecutor
 
-from endpoint_exception import EndpointException
+from .endpoint_exception import EndpointException
 from .endpoint import Endpoint
 from .xml_response import XmlResponse
 
@@ -42,7 +42,7 @@ class PdfXmp(Endpoint):
             response = XmlResponse(rest_response.content)
             response.is_successful = True
             response.status_code = rest_response.status_code
-        elif rest_response.status_code == 400:
+        elif rest_response.status_code == 401:
             raise EndpointException("Invalid api key specified.")
         else:
             response = XmlResponse()

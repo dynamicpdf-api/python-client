@@ -12,8 +12,8 @@ def test_params():
         "Title": "Python Client API Tests",
         "ApiKey": "",
         "BaseUrl": "https://api.dynamicpdf.com",
-        "ResourcesPath":"C:\\Data-ceTe Software\\Source\\Cloud-API\\python-client\\test\\Resources\\",
-        "OutputPath":"C:\\Data-ceTe Software\\Source\\Cloud-API\\python-client\\test\\Output\\"
+        "ResourcesPath":"./Resources/",
+        "OutputPath":"./Output/"
     }
 
     try:
