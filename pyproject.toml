@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [tool.poetry]
 name = "dynamicpdf_api"
-version = "1.2.0" 
+version = "1.1.0" 
 description = "A Python Client API that uses the DynamicPDF Cloud API to create, merge, split, form fill, stamp, secure/encrypt PDF documents and convert HTML, Word docuements to PDFs."
 license = "MIT"
 authors = [
