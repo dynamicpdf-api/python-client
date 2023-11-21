@@ -18,6 +18,10 @@ class TestPageInput:
         input1 = PageInput()
         text_element = TextElement("Hello World", ElementPlacement.TopCenter)
         input1.elements.append(text_element)
+        pdf.subject = "topLevel document metadata"
+        pdf.creator = "John Creator"
+        pdf.producer = "Ramyashree"
+        pdf.keywords = "dynamicpdf api example pdf dotnet instructions"
         pdf.inputs.append(input1)
 
         res = pdf.process()

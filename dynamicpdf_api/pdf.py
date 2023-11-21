@@ -109,6 +109,20 @@ class Pdf(Endpoint):
         self._instructions._creator = value
 
     @property
+    def producer(self):
+        '''
+        Gets the PDF Producer
+        '''
+        return self._instructions._producer
+
+    @producer.setter
+    def producer(self, value):
+        '''
+        Sets the PDF Producer
+        '''
+        self._instructions._producer = value
+
+    @property
     def keywords(self):
         '''
         Gets the Keywords
