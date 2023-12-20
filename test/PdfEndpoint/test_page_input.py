@@ -22,6 +22,7 @@ class TestPageInput:
         pdf.creator = "John Creator"
         pdf.producer = "Ramyashree"
         pdf.keywords = "dynamicpdf api example pdf dotnet instructions"
+        pdf.tag = True
         pdf.inputs.append(input1)
 
         res = pdf.process()

@@ -26,6 +26,7 @@ from dynamicpdf_api.elements.dim2_barcode_element import Dim2BarcodeElement
 from dynamicpdf_api.dlex_input import DlexInput
 from dynamicpdf_api.dlex_layout import DlexLayout
 from dynamicpdf_api.dlex_resource import DlexResource
+from dynamicpdf_api.additional_resource_type import AdditionalResourceType
 from dynamicpdf_api.elements.element_placement import ElementPlacement
 from dynamicpdf_api.elements.element_type import ElementType
 from dynamicpdf_api.encrypt_document_components import EncryptDocumentComponents

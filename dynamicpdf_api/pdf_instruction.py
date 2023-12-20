@@ -11,6 +11,7 @@ class PdfInstructions:
         self._subject = None
         self._creator = "DynamicPDF Cloud Api"
         self._producer = "DynamicPDF Cloud Api"
+        self._tag = None
         self._keywords = None
         self._security = None
         self._flatten_all_form_fields = None
@@ -31,6 +32,8 @@ class PdfInstructions:
             json["creator"] = self._creator
         if self._producer:
             json["producer"] = self._producer
+        if self._tag is not None:
+            json["tag"] = self._tag
         if self._keywords:
             json["keywords"] = self._keywords
         if self._security:

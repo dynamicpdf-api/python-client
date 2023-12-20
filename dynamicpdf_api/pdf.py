@@ -121,6 +121,20 @@ class Pdf(Endpoint):
         Sets the PDF Producer
         '''
         self._instructions._producer = value
+        
+    @property
+    def tag(self):
+        '''
+        Gets the Tag property
+        '''
+        return self._instructions._tag
+
+    @tag.setter
+    def tag(self, value):
+        '''
+        Sets the Tag property
+        '''
+        self._instructions._tag = value
 
     @property
     def keywords(self):
