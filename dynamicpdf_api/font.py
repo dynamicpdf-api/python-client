@@ -238,7 +238,7 @@ class Font:
         return font_text
     
     @staticmethod
-    def google(font_name, var=400, italic=False):
+    def google(font_name, var=None, italic=False):
         '''
         Gets the font from the google.
         
@@ -250,16 +250,33 @@ class Font:
         Returns:
             The font object.
         '''
-        
         if var is False:
             var = 400
         font = Font()
         if var is True:
             font._name = Font.get_google_font_text(font_name, 700, italic)
-        else:
+        elif type(var) == int:
             font._name = Font.get_google_font_text(font_name, var, italic)
+        else:
+            font._name = font_name
         return font
     
+    @staticmethod
+    def global_font(font_name):
+        '''
+        Gets the font from the global.
+        
+        Args:
+            font_name (string): The name of the font from the global storage.
+        
+        Returns:
+            The font object.
+        '''
+        
+        font = Font()
+        font._name = font_name
+        return font
+
     @staticmethod
     def from_system(font_name, resource_name=None):
         '''

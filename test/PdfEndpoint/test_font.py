@@ -64,3 +64,21 @@ class TestFont:
                 out_stream.write(res.content)
 
         assert res.is_successful
+
+    def test_font_global(self, pdf, test_params):
+        input = PageInput()
+        font = Font.global_font("Paris Normal")
+        font.embed = True
+        font.subset = True
+        element = TextElement("Hello World", ElementPlacement.TopLeft)
+        element.font = font
+        input.elements.append(element)
+        pdf.inputs.append(input)
+        
+        res = pdf.process()
+
+        if res.is_successful:
+            with open(test_params.output_path + "font_global.pdf", "wb") as out_stream:
+                out_stream.write(res.content)
+
+        assert res.is_successful

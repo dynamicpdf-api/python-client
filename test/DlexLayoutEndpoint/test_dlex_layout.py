@@ -68,3 +68,18 @@ class TestDlexLayout:
                 out_stream.write(res.content)
 
         assert res.is_successful
+
+    def test_dlex_layout_with_globalfont(self, test_params, get_endpoint):
+
+        layout_data = LayoutDataResource(test_params.resources_path + "test.json")
+        dlex_resource = DlexResource(test_params.resources_path + "test.dlex", "test.dlex")
+        dlex_endpoint = DlexLayout(dlex_resource, layout_data)
+        
+        dlex_endpoint = get_endpoint(dlex_endpoint, test_params)
+        res = dlex_endpoint.process()
+
+        if res.is_successful:
+            with open(test_params.output_path + "dlex_layout_with_globalfont.pdf", "wb") as out_stream:
+                out_stream.write(res.content)
+
+        assert res.is_successful
