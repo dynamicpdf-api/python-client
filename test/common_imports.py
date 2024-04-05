@@ -91,4 +91,6 @@ from dynamicpdf_api.elements.value_type import ValueType
 from dynamicpdf_api.web_color import WebColor
 from dynamicpdf_api.word_input import WordInput
 from dynamicpdf_api.word_resource import WordResource
+from dynamicpdf_api.excel_input import ExcelInput
+from dynamicpdf_api.excel_resource import ExcelResource
 from dynamicpdf_api.xml_response import XmlResponse

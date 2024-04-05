@@ -20,3 +20,6 @@ class InputType:
 
     # Word input.
     Word = "word"
+    
+    # Excel input.
+    Excel = "excel"

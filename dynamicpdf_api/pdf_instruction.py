@@ -9,8 +9,8 @@ class PdfInstructions:
         self._author = "CeteSoftware"
         self._title = None
         self._subject = None
-        self._creator = "DynamicPDF Cloud Api"
-        self._producer = "DynamicPDF Cloud Api"
+        self._creator = "DynamicPDF API"
+        self._producer = "DynamicPDF API"
         self._tag = None
         self._keywords = None
         self._security = None

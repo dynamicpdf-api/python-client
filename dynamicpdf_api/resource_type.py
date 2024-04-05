@@ -23,3 +23,6 @@ class ResourceType:
 
     # Word resource.
     Word = "word"
+    
+    # Excel resource.
+    Excel = "excel"

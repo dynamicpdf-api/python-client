@@ -3,17 +3,17 @@ from .page_size import PageSize
 from .page_orientation import PageOrientation
 from .converter_input import ConverterInput
 
-class WordInput(ConverterInput):
+class ExcelInput(ConverterInput):
     '''
-    Represents a Word input.
+    Represents a Excel input.
     '''
 
     def __init__(self, resource, size = PageSize.Letter, orientation = PageOrientation.Portrait, margins = None):
         '''
-        Initializes a new instance of the WordInput class.
+        Initializes a new instance of the ExcelInput class.
 
         Args:
-            resource (WordResource): The resource of type WordResource.
+            resource (ExcelResource): The resource of type ExcelResource.
             size (PageSize): The page size of the output PDF.
             orientation (PageOrientation): The page orientation of the output PDF.
             margins (float): The page margins of the output PDF.
@@ -21,17 +21,8 @@ class WordInput(ConverterInput):
         
         super().__init__(resource, size, orientation, margins)
        
-        self._type = InputType.Word
+        self._type = InputType.Excel
 
-        # Gets or sets the TextReplace object List
-        self.text_replace = []
-
-    @property
-    def _get_text_replace(self):
-        if self.text_replace and len(self.text_replace) > 0:
-            return self.text_replace
-        return None
-     
     def to_json(self):
         json = {
             "id":self.id,
@@ -49,9 +40,4 @@ class WordInput(ConverterInput):
             json["bottomMargin"] = self.bottom_margin
         if self.right_margin:
             json["rightMargin"] = self.right_margin
-        if self._get_text_replace:
-            text_replace=[]
-            for i in self._get_text_replace:
-                text_replace.append(i.to_json())
-            json["textReplace"] = text_replace
         return json

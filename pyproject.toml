@@ -4,16 +4,16 @@ build-backend = "setuptools.build_meta"
 
 [tool.poetry]
 name = "dynamicpdf_api"
-version = "1.3.0" 
-description = "A Python Client API that uses the DynamicPDF Cloud API to create, merge, split, form fill, stamp, secure/encrypt PDF documents and convert HTML, Word docuements to PDFs."
+version = "1.4.0" 
+description = "A Python Client API that uses the DynamicPDF API to create, merge, split, form fill, stamp, secure/encrypt PDF documents and convert HTML, Word docuements to PDFs."
 license = "MIT"
 authors = [
     "ceTe Software <info@dynamicpdf.com>",
 ]
 readme = "README.md"
-homepage = "https://cloud.dynamicpdf.com/"
+homepage = "https://dpdf.io/"
 repository = "https://github.com/dynamicpdf-api/python-client.git"
-documentation = "https://cloud.dynamicpdf.com/docs/"
+documentation = "https://dpdf.io/docs/"
 keywords = ["PDF", "Create", "Merge", "Split", "Fill", "Stamp", "Secure", "Encrypt", "Watermark", "REST API", "Html to PDF", "Word to PDF", "Image to PDF", "Convert"]
 exclude = ["test"]
 

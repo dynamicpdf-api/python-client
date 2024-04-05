@@ -12,6 +12,7 @@ from .image_input import ImageInput
 from .pdf_input import PdfInput
 from .html_input import HtmlInput
 from .word_input import WordInput
+from .excel_input import ExcelInput
 from .html_resource import HtmlResource
 from .page_size import PageSize
 from .dlex_input import DlexInput
@@ -282,6 +283,21 @@ class Pdf(Endpoint):
         '''
 
         input = WordInput(resource, size, orientation, margins)
+        self.inputs.append(input)
+        return input
+    
+    def add_excel(self, resource, size = PageSize.A4, orientation = PageOrientation.Portrait, margins = None):
+        '''
+        Returns a ExcelInput object containing the input pdf.
+
+        Args:
+            resource (ExcelResource):  The resource of type ExcelResource.
+            size (PageSize): the page size of the PDF pages
+            orientation (PageOrientation): The page orientation for the PDF pages
+            margins (integer): Margins for all four sides
+        '''
+
+        input = ExcelInput(resource, size, orientation, margins)
         self.inputs.append(input)
         return input
 
