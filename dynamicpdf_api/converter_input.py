@@ -11,8 +11,6 @@ class ConverterInput(Input):
     def __init__(self, resource, size, orientation, margins):
 
         super().__init__(resource)
-        self._page_size = size
-        self._page_orientation = orientation
 
          # Gets or sets the top margin.
         self.top_margin = margins
@@ -31,7 +29,19 @@ class ConverterInput(Input):
 
         # Gets or sets the height of the page.
         self.page_height = None
-        
+
+        if type(size) == float or type(size) == int:
+            self.page_width = size
+            self.page_height = orientation
+        else:         
+            self._page_size = size
+            self._page_orientation = orientation
+            if self.page_size != None:
+                self.page_size = size
+            if self.page_orientation != None:
+                self.page_orientation = orientation
+       
+
     @property
     def page_size(self):
         '''
@@ -46,19 +56,21 @@ class ConverterInput(Input):
         '''
         self._page_size = value
         smaller, larger = UnitConverter._get_paper_size(value)
-        if self._page_orientation == PageOrientation.Portrait:
-            self.page_height = larger
-            self.page_width = smaller
-        else:
+        if self.page_orientation == PageOrientation.Landscape:
             self.page_height = smaller
             self.page_width = larger
+        else:
+            self.page_height = larger
+            self.page_width = smaller
 
     @property
     def page_orientation(self):
         '''
         Gets page orientation.
         '''
+       
         return self._page_orientation
+       
 
     @page_orientation.setter
     def page_orientation(self, value):
@@ -66,15 +78,20 @@ class ConverterInput(Input):
         Sets page orientation.
         '''
         self._page_orientation = value
-        smaller, larger = UnitConverter._get_paper_size(self.page_size)
-        if self.page_width > self.page_height:
-            smaller, larger = self.page_height, self.page_width
-        if self._page_orientation == PageOrientation.Portrait:
-            self.page_height = larger
-            self.page_width = smaller
-        else:
-            self.page_height = smaller
-            self.page_width = larger
+        if self.page_width != None and self.page_height != None:
+            if self.page_width > self.page_height:
+                smaller = self.page_height
+                larger = self.page_width
+            else:
+                smaller = self.page_width
+                larger = self.page_height
+
+            if self.page_orientation == PageOrientation.Landscape:
+                self.page_height = smaller
+                self.page_width = larger
+            else:
+                self.page_height = larger
+                self.page_width = smaller
     
 
    

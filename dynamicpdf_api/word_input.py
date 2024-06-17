@@ -8,7 +8,7 @@ class WordInput(ConverterInput):
     Represents a Word input.
     '''
 
-    def __init__(self, resource, size = PageSize.Letter, orientation = PageOrientation.Portrait, margins = None):
+    def __init__(self, resource, size = None, orientation = None, margins = None):
         '''
         Initializes a new instance of the WordInput class.
 

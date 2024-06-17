@@ -10,7 +10,7 @@ class HtmlInput(ConverterInput):
     Represents a html input
     '''
     
-    def __init__(self, resource, base_path = None, size = PageSize.Letter, orientation = PageOrientation.Portrait, margins = None):
+    def __init__(self, resource, base_path = None, size = None, orientation = None, margins = None):
         '''
         Initializes a new instance of the HtmlInput class.
         

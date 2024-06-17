@@ -251,7 +251,7 @@ class Pdf(Endpoint):
         self.inputs.append(input)
         return input
 
-    def add_html(self, resource, base_path = None, size = PageSize.A4, orientation = PageOrientation.Portrait, margins = None):
+    def add_html(self, resource, base_path = None, size = None, orientation = None, margins = None):
         '''
         Returns a HtmlInput object containing the input pdf.
 
@@ -271,7 +271,7 @@ class Pdf(Endpoint):
         self.inputs.append(input)
         return input
     
-    def add_word(self, resource, size = PageSize.A4, orientation = PageOrientation.Portrait, margins = None):
+    def add_word(self, resource, size = None, orientation = None, margins = None):
         '''
         Returns a WordInput object containing the input pdf.
 
@@ -286,7 +286,7 @@ class Pdf(Endpoint):
         self.inputs.append(input)
         return input
     
-    def add_excel(self, resource, size = PageSize.A4, orientation = PageOrientation.Portrait, margins = None):
+    def add_excel(self, resource, size = None, orientation = None, margins = None):
         '''
         Returns a ExcelInput object containing the input pdf.
 
