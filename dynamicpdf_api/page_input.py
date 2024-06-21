@@ -9,7 +9,7 @@ class PageInput(Input):
     Represents a page input.
     '''
 
-    def __init__(self, size = PageSize.Letter, orientation = PageOrientation.Portrait, margins = None):
+    def __init__(self, size = None, orientation = None, margins = None):
         '''
         Initializes a new instance of the PageInput class.
 
@@ -21,8 +21,6 @@ class PageInput(Input):
 
         super().__init__()
         self._elements = []
-        self._default_page_height = 792.0
-        self._default_page_width = 612.0
 
         # Gets or sets the top margin.
         self.top_margin = margins
@@ -41,23 +39,19 @@ class PageInput(Input):
 
         # Gets or sets the height of the page.
         self.page_height = None
+
         self._type=InputType.Page
+
         if type(size) == float or type(size) == int:
             self.page_width = size
             self.page_height = orientation
         else:
             self._page_size = size
             self._page_orientation = orientation
-            self.page_size = size
-            self.page_orientation = orientation
-
-    @property
-    def _width(self):
-        return self.page_width or self._default_page_width
-
-    @property
-    def _height(self):
-        return self.page_height or self._default_page_height
+            if self.page_size != None:
+                self.page_size = size
+            if self.page_orientation != None:
+                self.page_orientation = orientation
 
     @property
     def page_size(self):
@@ -73,12 +67,12 @@ class PageInput(Input):
         '''
         self._page_size = value
         smaller, larger = UnitConverter._get_paper_size(value)
-        if self._page_orientation == PageOrientation.Portrait:
-            self.page_height = larger
-            self.page_width = smaller
-        else:
+        if self._page_orientation == PageOrientation.Landscape:
             self.page_height = smaller
             self.page_width = larger
+        else:
+            self.page_height = larger
+            self.page_width = smaller
 
     @property
     def page_orientation(self):
@@ -93,19 +87,20 @@ class PageInput(Input):
         Sets page orientation.
         '''
         self._page_orientation = value
-        if self._width > self._height:
-            smaller = self._height
-            larger = self._width
-        else:
-            smaller = self._width
-            larger = self._height
+        if self.page_width != None and self.page_height != None:
+            if self.page_width > self.page_height:
+                smaller = self.page_height
+                larger = self.page_width
+            else:
+                smaller = self.page_width
+                larger = self.page_height
 
-        if self.page_orientation == PageOrientation.Portrait:
-            self.page_height = larger
-            self.page_width = smaller
-        else:
-            self.page_height = smaller
-            self.page_width = larger
+            if self.page_orientation == PageOrientation.Landscape:
+                self.page_height = smaller
+                self.page_width = larger
+            else:
+                self.page_height = larger
+                self.page_width = smaller
 
     @property
     def elements(self):

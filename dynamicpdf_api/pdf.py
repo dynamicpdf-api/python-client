@@ -314,7 +314,7 @@ class Pdf(Endpoint):
         self.inputs.append(input)
         return input
     
-    def add_page(self, page_width = PageSize.Letter, page_height = PageOrientation.Portrait, margins = None):
+    def add_page(self, page_width = None, page_height = None):
         '''
         Returns a PageInput object containing the input pdf.
         
@@ -322,10 +322,14 @@ class Pdf(Endpoint):
             pageWidth (float): The width of the page.
             pageHeight (float): The height of the page.
         '''
-
-        input = PageInput(page_width, page_height, margins)
-        self.inputs.append(input)
-        return input
+        if page_width != None and page_height != None:
+            input = PageInput(page_width, page_height)
+            self.inputs.append(input)
+            return input
+        else:
+            input = PageInput()
+            self.inputs.append(input)
+            return input
     
     def get_instructions_json(self, indented = False):
         if indented:
