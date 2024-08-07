@@ -1,6 +1,8 @@
 import pytest
 import json
 import os
+import base64
+import os
 
 @pytest.fixture
 def test_params():
@@ -64,3 +66,14 @@ def get_endpoint():
             os.makedirs(test_params.output_path)
         return endpoint
     return _get_endpoint
+
+@pytest.fixture
+def get_imaging():
+    def _get_imaging(outputFile, res):
+        i = 0
+        for image in res.images:
+            output_file_path = outputFile +str(i)+"."+res.image_format
+            with open(output_file_path, 'wb') as file:
+                file.write(base64.b64decode(res.images[i].data))
+                i = i + 1
+    return _get_imaging

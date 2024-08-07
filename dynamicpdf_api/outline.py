@@ -34,10 +34,6 @@ class Outline:
 
         if type(pdf_input) != str:
             self._from_input_id = pdf_input.id
-            if pdf_input.merge_options is None:
-                pdf_input.merge_options = MergeOptions()
-            else:
-                pdf_input.merge_options.outlines = False
         else:
             self.text = pdf_input
             self.action = action
