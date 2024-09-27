@@ -332,6 +332,18 @@ class Pdf(Endpoint):
             return input
     
     def get_instructions_json(self, indented = False):
+        for input in self._instructions._inputs:
+            if input._type == InputType.Page:
+                for element in input.elements:
+                    if element._text_font and element._text_font.resource_name:
+                        self._instructions._fonts.add(element._text_font)          
+            if input.template:
+                self._instructions._templates.add(input.template)
+                if input.template.elements and len(input.template.elements) > 0:
+                    for element in input.template.elements:
+                        if element._text_font:
+                            self._instructions._fonts.add(element._text_font)
+        
         if indented:
             return json.dumps(self._instructions.to_json(), indent = 2)
         else:

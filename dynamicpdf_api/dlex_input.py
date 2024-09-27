@@ -39,9 +39,10 @@ class DlexInput(Input):
         json = {
             "id": self.id,
             "type": InputType.Dlex,
-            "resourceName": self.resource_name,
             "layoutDataResourceName": self.layout_data_resource_name
             }
-        if self._template_id:
+        if self.resource_name is not None:
+            json["resourceName"] = self.resource_name
+        if self._template_id is not None:
             json["templateId"] = self._template_id
         return json

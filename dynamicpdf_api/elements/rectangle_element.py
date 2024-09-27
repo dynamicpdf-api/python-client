@@ -89,13 +89,19 @@ class RectangleElement(Element):
 
     def to_json(self):
         json= {
-            "type": self._type,
-            "placement": self.placement,
-            "xOffset": self.x_offset,
-            "yOffset": self.y_offset,
-            "width": self.width,
-            "height": self.height,
+            "type": self._type
         }
+       
+        if self.placement is not None:
+            json["placement"] = self.placement
+        if self.x_offset is not None:
+            json["xOffset"] = self.x_offset
+        if self.y_offset is not None:
+            json["yOffset"] = self.y_offset
+        if self.width is not None:
+            json["width"] = self.width
+        if self.height:
+            json["height"] = self.height
         if self.even_pages is not None:
             json["evenPages"] = self.even_pages
         if self.odd_pages is not None:

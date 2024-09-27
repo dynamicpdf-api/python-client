@@ -29,13 +29,18 @@ class MsiBarcodeElement(TextBarcodeElement):
 
     def to_json(self):
         json= {
-            "type": self._type,
-            "value": self.value,
-            "placement": self.placement,
-            "xOffset": self.x_offset,
-            "yOffset": self.y_offset,
-            "height": self.height
+            "type": self._type
         }
+        if self.value is not None:
+            json["value"] = self.value
+        if self.placement is not None:
+            json["placement"] = self.placement
+        if self.x_offset is not None:
+            json["xOffset"] = self.x_offset
+        if self.y_offset is not None:
+            json["yOffset"] = self.y_offset
+        if self.height is not None:
+            json["height"] = self.height
         if self._color_name:
             json["color"] = self._color_name
         if self.even_pages is not None:

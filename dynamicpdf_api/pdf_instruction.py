@@ -20,23 +20,21 @@ class PdfInstructions:
 
     def to_json(self):
         json = {}
-        if self._author:
+        if self._author is not None:
             json["author"] = self._author
-        if self._title:
+        if self._title is not None:
             json["title"] = self._title
-        if self._form_fields:
-            json["formFields"] = self._form_fields
-        if self._subject:
+        if self._subject is not None:
             json["subject"] = self._subject
-        if self._creator:
+        if self._creator is not None:
             json["creator"] = self._creator
-        if self._producer:
+        if self._producer is not None:
             json["producer"] = self._producer
         if self._tag is not None:
             json["tag"] = self._tag
-        if self._keywords:
+        if self._keywords is not None:
             json["keywords"] = self._keywords
-        if self._security:
+        if self._security is not None:
             json["security"] = self._security.to_json()
         if self._flatten_all_form_fields is not None:
             json["flattenAllFormFields"] = self._flatten_all_form_fields
@@ -45,7 +43,8 @@ class PdfInstructions:
         fonts = []
         for i in self._fonts:
             fonts.append(i.to_json())
-        json["fonts"] = fonts
+        if len(fonts) > 0:
+            json["fonts"] = fonts
         inputs = []
         for i in self._inputs:
             inputs.append(i.to_json())
@@ -53,10 +52,13 @@ class PdfInstructions:
         form_field = []
         for i in self._form_fields:
             form_field.append(i.to_json())
-        json["formFields"] = form_field
+        if len(form_field) > 0:
+            json["formFields"] = form_field
         templates = []
         for i in self._templates:
             templates.append(i.to_json())
-        json["templates"] = templates
-        json["outlines"] = self._outlines.to_json()
+        if len(templates) > 0:
+            json["templates"] = templates
+        if len(self._outlines._outlines) > 0:
+            json["outlines"] = self._outlines.to_json()
         return json

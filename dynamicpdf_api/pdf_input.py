@@ -29,15 +29,16 @@ class PdfInput(Input):
     def to_json(self):
         json={
             "id": self.id,
-            "resourceName": self.resource_name,
             "type": self._type
         }
-        if self._template_id:
+        if self.resource_name is not None:
+            json['resourceName'] = self.resource_name
+        if self._template_id is not None:
             json["templateId"] = self._template_id
-        if self.merge_options:
+        if self.merge_options is not None:
             json["mergeOptions"] = self.merge_options.to_json()
-        if self.start_page != None:
+        if self.start_page is not None:
             json['startPage'] = self.start_page
-        if self.page_count != None:
+        if self.page_count is not None:
             json['pageCount'] = self.page_count
         return json

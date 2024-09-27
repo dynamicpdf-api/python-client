@@ -65,22 +65,27 @@ class LineElement(Element):
 
     def to_json(self):
         json = {
-            "type": self._type,
-            "placement": self.placement,
-            "xOffset": self.x_offset,
-            "yOffset": self.y_offset,
-            "x2Offset": self.x2_offset,
-            "y2Offset": self.y2_offset
+            "type": self._type
         }
-        if self._color_name:
+        if self.placement is not None:
+            json["placement"] = self.placement
+        if self.x_offset is not None:
+            json["xOffset"] = self.x_offset
+        if self.y_offset is not None:
+            json["yOffset"] = self.y_offset
+        if self.x2_offset is not None:
+            json["x2Offset"] = self.x2_offset
+        if self.y2_offset is not None:
+            json["y2Offset"] = self.y2_offset
+        if self._color_name is not None:
             json["color"] = self._color_name
         if self.even_pages is not None:
             json["evenPages"] = self.even_pages
         if self.odd_pages is not None:
             json["oddPages"] = self.odd_pages
-        if self._line_style_name: 
+        if self._line_style_name is not None: 
             json["lineStyle"] = self._line_style_name
-        if self.width:
+        if self.width is not None:
             json["width"] = self.width
         return json
     

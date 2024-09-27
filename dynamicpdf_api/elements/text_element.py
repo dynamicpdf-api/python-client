@@ -83,11 +83,14 @@ class TextElement(Element):
     def to_json(self):
         json= {
             "type": self._type,
-            "text": self.text,
-            "placement": self.placement,
-            "xOffset": self.x_offset,
-            "yOffset": self.y_offset
+            "text": self.text
         }
+        if self.placement:
+            json["placement"] = self.placement
+        if self.x_offset is not None:
+            json["xOffset"] = self.x_offset
+        if self.y_offset is not None:
+            json["yOffset"] = self.y_offset
         if self._color_name:
             json["color"] = self._color_name
         if self.even_pages is not None:

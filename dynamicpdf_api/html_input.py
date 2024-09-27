@@ -33,21 +33,24 @@ class HtmlInput(ConverterInput):
     def to_json(self):
         json = {
             "type": self._type,
-            "resourceName": self.resource_name,
-            "id": self.id,
-            "pageHeight": self.page_height,
-            "pageWidth": self.page_width
+            "id": self.id
         }
-        if self._template_id:
+        if self.page_height is not None:
+            json["pageHeight"] = self.page_height
+        if self.page_width is not None:
+            json["pageWidth"] = self.page_width   
+        if self.resource_name is not None:
+            json["resourceName"] = self.resource_name
+        if self._template_id is not None:
             json["templateId"] = self._template_id
-        if self.base_path:
+        if self.base_path is not None:
             json["basePath"] = self.base_path
-        if self.top_margin:
+        if self.top_margin is not None:
             json["topMargin"] = self.top_margin
-        if self.left_margin:
+        if self.left_margin is not None:
             json["leftMargin"] = self.left_margin
-        if self.bottom_margin:
+        if self.bottom_margin is not None:
             json["bottomMargin"] = self.bottom_margin
-        if self.right_margin:
+        if self.right_margin is not None:
             json["rightMargin"] = self.right_margin
         return json

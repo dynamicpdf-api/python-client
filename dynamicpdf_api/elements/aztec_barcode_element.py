@@ -38,29 +38,33 @@ class AztecBarcodeElement(Dim2BarcodeElement):
 
     def to_json(self):
         json = {
-            "type": self._type,
-            "value": self.value,
-            "placement": self.placement,
-            "xOffset": self.x_offset,
-            "yOffset": self.y_offset     
+            "type": self._type   
         }
-        if self._color_name:
+        if self.value is not None:
+            json["value"] = self.value
+        if self.placement is not None:
+            json["placement"] = self.placement
+        if self.x_offset is not None:
+            json["xOffset"] = self.x_offset
+        if self.y_offset is not None:
+            json["yOffset"] = self.y_offset
+        if self._color_name is not None:
             json["color"] = self._color_name
         if self.even_pages is not None:
             json["evenPages"] = self.even_pages
         if self.odd_pages is not None:
             json["oddPages"] = self.odd_pages
-        if self.x_dimension:
+        if self.x_dimension is not None:
             json["xDimension"] = self.x_dimension
-        if self._value_type:
+        if self._value_type is not None:
             json["valueType"] = self._value_type
-        if self.process_tilde:
+        if self.process_tilde is not None:
             json["processTilde"] = self.process_tilde
-        if self.symbol_size:
+        if self.symbol_size is not None:
             json["symbolSize"] = self.symbol_size
-        if self.aztec_error_correction:
+        if self.aztec_error_correction is not None:
             json["aztecErrorCorrection"] = self.aztec_error_correction
-        if self.reader_initialization_symbol:
+        if self.reader_initialization_symbol is not None:
             json["readerInitializationSymbol"] = self.reader_initialization_symbol
         return json
     

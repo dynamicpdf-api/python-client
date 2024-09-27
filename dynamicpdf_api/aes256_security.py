@@ -27,10 +27,12 @@ class Aes256Security(Security):
 
     def to_json(self):
         json = {
-            'type': self._type,
-            'userPassword': self.user_password,
-            'ownerPassword': self.owner_password
+            'type': self._type
         }
+        if self.user_password is not None:
+            json["userPassword"] = self.user_password
+        if self.owner_password is not None:
+            json["ownerPassword"] = self.owner_password
         if self.allow_copy is not None:
             json["allowCopy"] = self.allow_copy
         if self.allow_edit is not None:
@@ -47,6 +49,6 @@ class Aes256Security(Security):
             json["allowHighResolutionPrinting"] = self.allow_high_resolution_printing
         if self.allow_document_assembly is not None:
             json["allowDocumentAssembly"] = self.allow_document_assembly
-        if self.document_components:
+        if self.document_components is not None:
             json['documentComponents'] = self.document_components
         return json

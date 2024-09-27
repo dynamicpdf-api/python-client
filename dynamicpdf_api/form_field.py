@@ -29,7 +29,7 @@ class FormField:
         json={
             "name": self.name
         }
-        if self.value:
+        if self.value is not None:
             json['value'] = self.value
         if self.flatten is not None:
             json['flatten'] = self.flatten

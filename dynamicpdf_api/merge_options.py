@@ -79,7 +79,7 @@ class MergeOptions:
             json["pageAnnotations"] = self.page_annotations
         if self.page_labels_and_sections is not None:
             json["pageLabelsAndSections"] = self.page_labels_and_sections
-        if self.root_form_field:
+        if self.root_form_field is not None:
             json["rootFormField"] = self.root_form_field
         if self.xmp_metadata is not None:
             json["xmpMetadata"] = self.xmp_metadata

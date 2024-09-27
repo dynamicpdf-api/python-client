@@ -35,23 +35,28 @@ class WordInput(ConverterInput):
     def to_json(self):
         json = {
             "id":self.id,
-            "resourceName": self.resource_name,
-            "templateId": self._template_id,
-            "type": self._type,
-            "pageWidth": self.page_width,
-            "pageHeight": self.page_height,
+            "type": self._type
         }
-        if self.top_margin:
+        if self._template_id is not None:
+            json["templateId"] = self._template_id
+        if self.page_height is not None:
+            json["pageHeight"] = self.page_height
+        if self.page_width is not None:
+            json["pageWidth"] = self.page_width   
+        if self.resource_name is not None:
+            json["resourceName"] = self.resource_name
+        if self.top_margin is not None:
             json["topMargin"] = self.top_margin
-        if self.left_margin:
+        if self.left_margin is not None:
             json["leftMargin"] = self.left_margin
-        if self.bottom_margin:
+        if self.bottom_margin is not None:
             json["bottomMargin"] = self.bottom_margin
-        if self.right_margin:
+        if self.right_margin is not None:
             json["rightMargin"] = self.right_margin
         if self._get_text_replace:
             text_replace=[]
             for i in self._get_text_replace:
                 text_replace.append(i.to_json())
+        # if len(text_replace) > 0:
             json["textReplace"] = text_replace
         return json

@@ -28,28 +28,34 @@ class Gs1DataBarBarcodeElement(TextBarcodeElement):
 
     def to_json(self):
         json = {
-            "type": self._type,
-            "value": self.value,
-            "placement": self.placement,
-            "xOffset": self.x_offset,
-            "yOffset": self.y_offset,
-            'height': self.height,
-            'gs1DataBarType': self.gs1_data_bar_type
+            "type": self._type
         }
-        if self._color_name:
+        if self.value is not None:
+            json["value"] = self.value
+        if self.placement is not None:
+            json["placement"] = self.placement
+        if self.x_offset is not None:
+            json["xOffset"] = self.x_offset
+        if self.y_offset is not None:
+            json["yOffset"] = self.y_offset
+        if self.height is not None:
+            json["height"] = self.height
+        if self.gs1_data_bar_type is not None:
+            json["gs1DataBarType"] = self.gs1_data_bar_type
+        if self._color_name is not None:
             json["color"] = self._color_name
         if self.even_pages is not None:
             json["evenPages"] = self.even_pages
         if self.odd_pages is not None:
             json["oddPages"] = self.odd_pages
-        if self.x_dimension:
+        if self.x_dimension is not None:
             json["xDimension"] = self.x_dimension
-        if self.font_size:
+        if self.font_size is not None:
             json["fontSize"] = self.font_size
         if self.show_text is not None:
             json["showText"] = self.show_text
-        if self._font_name:
+        if self._font_name is not None:
             json["font"] = self._font_name
-        if self._text_color_name:
+        if self._text_color_name is not None:
             json["textColor"] = self._text_color_name
         return json

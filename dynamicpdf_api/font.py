@@ -344,9 +344,10 @@ class Font:
     
     def to_json(self):
         json= {
-            "resourceName": self.resource_name,
             "name": self._name
         }
+        if self.resource_name is not None:
+            json["resourceName"] = self.resource_name
         if self.embed is not None:
             json["embed"] = self.embed
         if self.subset is not None:

@@ -108,19 +108,22 @@ class PageNumberingElement(Element):
     def to_json(self):
         json = {
             "type": self._type,
-            "text": self.text,
-            "placement": self.placement,
-            "xOffset": self.x_offset,
-            "yOffset": self.y_offset,
+            "text": self.text
         }
-        if self._color_name:
+        if self.placement is not None:
+            json["placement"] = self.placement
+        if self.x_offset is not None:
+            json["xOffset"] = self.x_offset
+        if self.y_offset is not None:
+            json["yOffset"] = self.y_offset
+        if self._color_name is not None:
             json["color"] = self._color_name
         if self.even_pages is not None:
             json["evenPages"] = self.even_pages
         if self.odd_pages is not None:
             json["oddPages"] = self.odd_pages
-        if self.font_size:
+        if self.font_size is not None:
             json["fontSize"] = self.font_size
-        if self._font_name:
+        if self._font_name is not None:
             json["font"] = self._font_name
         return json

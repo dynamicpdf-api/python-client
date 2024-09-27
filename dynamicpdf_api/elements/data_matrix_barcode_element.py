@@ -37,25 +37,32 @@ class DataMatrixBarcodeElement(Dim2BarcodeElement):
     
     def to_json(self):
         json = {
-            "type": self._type,
-            "value": self.value,
-            "placement": self.placement,
-            "xOffset": self.x_offset,
-            "yOffset": self.y_offset,
-            'dataMatrixEncodingType': self._data_matrix_encoding_type,
-            'dataMatrixFunctionCharacter': self._data_matrix_function_character,
-            'dataMatrixSymbolSize': self._data_matrix_symbol_size,
+            "type": self._type
         }
-        if self._color_name:
+        if self.value is not None:
+            json["value"] = self.value
+        if self.placement is not None:
+            json["placement"] = self.placement
+        if self.x_offset is not None:
+            json["xOffset"] = self.x_offset
+        if self.y_offset is not None:
+            json["yOffset"] = self.y_offset
+        if self._data_matrix_encoding_type is not None:
+            json["dataMatrixEncodingType"] = self._data_matrix_encoding_type
+        if self._data_matrix_function_character is not None:
+            json["dataMatrixFunctionCharacter"] = self._data_matrix_function_character
+        if self._data_matrix_symbol_size is not None:
+            json["dataMatrixSymbolSize"] = self._data_matrix_symbol_size
+        if self._color_name is not None:
             json["color"] = self._color_name
         if self.even_pages is not None:
             json["evenPages"] = self.even_pages
         if self.odd_pages is not None:
             json["oddPages"] = self.odd_pages
-        if self.x_dimension:
+        if self.x_dimension is not None:
             json["xDimension"] = self.x_dimension
-        if self._value_type:
+        if self._value_type is not None:
             json["valueType"] = self._value_type
-        if self.process_tilde:
+        if self.process_tilde is not None:
             json['processTilde'] = self.process_tilde
         return json

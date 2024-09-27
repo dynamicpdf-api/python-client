@@ -45,12 +45,16 @@ class ImageElement(Element):
 
     def to_json(self):
         json= {
-            "resourceName": self._resource_name,
-            "type": self._type,
-            "placement": self.placement,
-            "xOffset": self.x_offset,
-            "yOffset": self.y_offset
+            "type": self._type
         }
+        if self.placement is not None:
+            json["placement"] = self.placement
+        if self.x_offset is not None:
+            json["xOffset"] = self.x_offset
+        if self.y_offset is not None:
+            json["yOffset"] = self.y_offset
+        if self._resource_name is not None:
+            json["resourceName"] = self._resource_name
         if self.even_pages is not None:
             json["evenPages"] = self.even_pages
         if self.odd_pages is not None:
