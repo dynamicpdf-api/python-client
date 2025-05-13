@@ -124,3 +124,4 @@ from dynamicpdf_api.imaging.tiff_color_format import TiffColorFormat
 from dynamicpdf_api.imaging.tiff_image_format import TiffImageFormat
 from dynamicpdf_api.imaging.tiff_indexed_color_format import TiffIndexedColorFormat
 from dynamicpdf_api.imaging.tiff_monochrome_color_format import TiffMonochromeColorFormat
+from dynamicpdf_api.text_order import TextOrder
