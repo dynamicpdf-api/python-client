@@ -23,7 +23,7 @@ class FullNameTable:
             if self._read_u_short(i + 6) == 4:  
                 if (self._read_u_short(i) == 3 and self._read_u_short(i + 2) == 1 and self._read_u_short(i + 4) == 0x0409):  # 3 for Platform ID, 1 for Encoding ID and 0x0409 Language ID for English (United States)
                     full_font_name = self._data[data_start + self._read_u_short(i + 10) : data_start + self._read_u_short(i + 10) + self._read_u_short(i + 8)]
-                    self._full_font_name = full_font_name.decode('utf-16').strip().replace(" ", "").replace("-", "")
+                    self._full_font_name = full_font_name.decode('utf-16-be').strip().replace(" ", "").replace("-", "")
                     break
 
         if len(self._full_font_name) == 0:
@@ -31,7 +31,7 @@ class FullNameTable:
                 if self._read_u_short(i + 6) == 4:
                     if (self._read_u_short(i) == 3 and self._read_u_short(i + 2) == 0 and self._read_u_short(i + 4) == 0x0409): 
                         full_font_name = self._data[data_start + self._read_u_short(i + 10) : data_start + self._read_u_short(i + 10) + self._read_u_short(i + 8)]
-                        self._full_font_name = full_font_name.decode('utf-16').strip().replace(" ", "").replace("-", "")
+                        self._full_font_name = full_font_name.decode('utf-16-be').strip().replace(" ", "").replace("-", "")
                         break
 
         self._data = None
@@ -49,9 +49,6 @@ class FullNameTable:
         int_return *= 0x100
         int_return += data[index + 3]
         return int_return
-    
-    def _read_u_long(self, index):
-        return self._read_u_long(self._data, index)
     
     def _read_u_short(self, index):
         return (self._data[index] << 8) | self._data[index + 1]

@@ -30,11 +30,13 @@ from dynamicpdf_api.additional_resource_type import AdditionalResourceType
 from dynamicpdf_api.elements.element_placement import ElementPlacement
 from dynamicpdf_api.elements.element_type import ElementType
 from dynamicpdf_api.encrypt_document_components import EncryptDocumentComponents
+from dynamicpdf_api.encryption_type import EncryptionType
 from dynamicpdf_api.endpoint import Endpoint
 from dynamicpdf_api.elements.error_correction import ErrorCorrection
 from dynamicpdf_api.font import Font
 from dynamicpdf_api.font_information import FontInformation
 from dynamicpdf_api.form_field import FormField
+from dynamicpdf_api.full_name_table import FullNameTable
 from dynamicpdf_api.go_to_action import GoToAction
 from dynamicpdf_api.grayscale import Grayscale
 from dynamicpdf_api.elements.gs1_data_bar_barcode_element import Gs1DataBarBarcodeElement
@@ -70,6 +72,9 @@ from dynamicpdf_api.pdf_info_response import PdfInfoResponse
 from dynamicpdf_api.pdf_input import PdfInput
 from dynamicpdf_api.pdf_resource import PdfResource
 from dynamicpdf_api.pdf_response import PdfResponse
+from dynamicpdf_api.pdf_security_info import PdfSecurityInfo
+from dynamicpdf_api.pdf_security_info_endpoint import PdfSecurityInfoEndpoint
+from dynamicpdf_api.pdf_security_info_response import PdfSecurityInfoResponse
 from dynamicpdf_api.pdf_text import PdfText
 from dynamicpdf_api.pdf_text_response import PdfTextResponse
 from dynamicpdf_api.pdf_xmp import PdfXmp

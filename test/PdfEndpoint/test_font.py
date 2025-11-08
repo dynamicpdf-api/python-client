@@ -82,3 +82,21 @@ class TestFont:
                 out_stream.write(res.content)
 
         assert res.is_successful
+        
+    def test_font_system(self, pdf, test_params):
+        input1 = PageInput()
+        font = Font.from_system("Monotype Corsiva")
+        font.embed = False
+        font.subset = False
+        element = TextElement("Monotype Corsiva", ElementPlacement.TopLeft)
+        element.font = font
+        input1.elements.append(element)
+        pdf.inputs.append(input1)
+
+        res = pdf.process()
+
+        if res.is_successful:
+            with open(test_params.output_path + "font_system.pdf", "wb") as out_stream:
+                out_stream.write(res.content)
+
+        assert res.is_successful

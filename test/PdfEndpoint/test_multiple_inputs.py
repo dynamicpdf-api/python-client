@@ -2,6 +2,7 @@ import pytest
 from ..common_imports import (
     PdfInput,
     Pdf,
+    ImageElement,
     ImageResource,
     ImageInput,
     PageInput,
@@ -30,8 +31,14 @@ class TestMultipleInputs:
         page_input.elements.append(text_element)
         pdf.inputs.append(page_input)
 
-        resource = ImageResource(test_params.resources_path + "Northwind Logo.gif", "Northwind Logo.gif")
-        pdf.resources.add(resource)
+        page_input = PageInput()
+        resource = ImageResource(test_params.resources_path + "DocumentA.jpeg", "DocumentA.jpeg")
+        image_element = ImageElement(resource, ElementPlacement.TopCenter)
+        image_element.x_offset = 50
+        image_element.y_offset = 50
+        page_input.elements.append(image_element)
+        pdf.inputs.append(page_input)
+        
         with open(test_params.resources_path + "SimpleReportData.json", "r", encoding="utf-8-sig") as file:
             json_string = file.read()
         dlex_input = DlexInput("TFWResources/SimpleReportWithCoverPage.dlex", json_string)
@@ -47,7 +54,7 @@ class TestMultipleInputs:
         res = pdf.process()
 
         if res.is_successful:
-            with open(test_params.output_path + "different_input.pdf", "wb") as out_stream:
+            with open(test_params.output_path + "MutipleInput_PdfOutput.pdf", "wb") as out_stream:
                 out_stream.write(res.content)
 
         assert res.is_successful

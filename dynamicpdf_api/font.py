@@ -1,3 +1,5 @@
+import io
+import threading
 import os
 import uuid
 from pathlib import Path
@@ -24,8 +26,8 @@ class Font:
     _courier_bold_oblique = None
     _symbol = None
     _zapf_dingbats = None
-    _load_required = None
-    _lock_object = object()
+    _load_required = True
+    _lock_object = threading.Lock()
     _font_details = []
     _path_to_fonts_resource_directory = ""
 
@@ -303,43 +305,49 @@ class Font:
     
     @staticmethod
     def _load_fonts():
-        if not Font._load_required:
-            return
-        Font._load_required = False
-        if Font._path_to_fonts_resource_directory == "":
-            try:
-                wind_dir = os.environ.get("WINDIR")
-                if wind_dir is not None and len(wind_dir) > 0:
-                    Font._path_to_fonts_resource_directory = os.path.join(wind_dir, "Fonts")
-            except Exception:
-                pass
+        with Font._lock_object:
+            if not Font._load_required:
+                return
+            Font._load_required = False
+            if Font._path_to_fonts_resource_directory == "":
+                try:
+                    wind_dir = os.environ.get("WINDIR")
+                    if wind_dir is not None and len(wind_dir) > 0:
+                        Font._path_to_fonts_resource_directory = os.path.join(wind_dir, "Fonts")
+                except Exception:
+                    pass
 
-        if Font._path_to_fonts_resource_directory and Font._path_to_fonts_resource_directory != "":
-            di = Path(Font._path_to_fonts_resource_directory)
-            all_files = di.glob("*")
+            if Font._path_to_fonts_resource_directory and Font._path_to_fonts_resource_directory != "":
+                di = Path(Font._path_to_fonts_resource_directory)
+                all_files = di.rglob("*")
 
-            for file in all_files:
-                with open(file, "rb") as reader:
-                    name_table = Font._read_font_name_table(reader)
-                if name_table is not None:
-                    Font._font_details.append(FontInformation(name_table.font_name, str(file)))
+                for file in all_files:
+                    if not file.suffix.lower() in [".ttf", ".otf"]:
+                        continue
+                    
+                    with open(file, "rb") as reader:
+                        name_table = Font._read_font_name_table(reader)
+                    if name_table is not None:
+                        Font._font_details.append(FontInformation(name_table.font_name, str(file)))
 
     @staticmethod
     def _read_font_name_table(reader):
         name_table = None
         try:
-            reader.seek(4)
-            int_table_count = (reader.read(1)[0] << 8) or reader.read(1)[0]
+            reader.seek(4, io.SEEK_SET)
+            int_table_count = (reader.read(1)[0] << 8) | reader.read(1)[0]
+           
             if int_table_count > 0:
+                reader.seek(12, io.SEEK_SET)
                 byt_table_directory = bytearray(reader.read(int_table_count * 16))
-                reader.seek(12)
-                reader.readinto(byt_table_directory)
+            
                 for i in range(0, len(byt_table_directory), 16):
-                    if int.from_bytes(byt_table_directory[i:i+4], byteorder="big") == 1701667182:  # "name"
+                    tag_value = int.from_bytes(byt_table_directory[i: i+ 4], byteorder="big")
+                    if tag_value == 0x6E616D65:  # "name"
                         name_table = FullNameTable(reader, byt_table_directory, i)
                         break
-        except:
-            pass
+        except Exception as e:
+            print("Error in _read_font_name_table:", e)
         return name_table
     
     def to_json(self):
