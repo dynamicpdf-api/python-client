@@ -313,24 +313,26 @@ class Pdf(Endpoint):
         input = DlexInput(value, layout_data)
         self.inputs.append(input)
         return input
-    
-    def add_page(self, page_width = None, page_height = None):
+       
+    def add_page(self, size = None, orientation = None, margins = None):
         '''
-        Returns a PageInput object containing the input pdf.
-        
+        Returns a PageInput object containing the input PDF.
+
         Args:
-            pageWidth (float): The width of the page.
-            pageHeight (float): The height of the page.
+            size (PageSize | float | None): The size of the page OR the width of the page.
+            orientation (PageOrientation | float | None): The orientation of the page OR the height of the page.
+            margins (float | None): The margins of the page.
         '''
-        if page_width != None and page_height != None:
-            input = PageInput(page_width, page_height)
-            self.inputs.append(input)
-            return input
+        if ((type(size) == str or size is None) and (type(orientation) == str or orientation is None)):
+            input = PageInput(size, orientation, margins)
+        elif ((type(size) == float or type(size) == int) and (type(orientation) == float or type(orientation) == int)):
+            input = PageInput(size, orientation)
         else:
             input = PageInput()
-            self.inputs.append(input)
-            return input
-    
+
+        self.inputs.append(input)
+        return input
+
     def get_instructions_json(self, indented = False):
         for input in self._instructions._inputs:
             if input._type == InputType.Page:

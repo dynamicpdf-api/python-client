@@ -5,6 +5,8 @@ from ..common_imports import (
     TextElement,
     ElementPlacement,
     Template,
+    PageSize,
+    PageOrientation
 )
 
 class TestPageInput:
@@ -29,6 +31,19 @@ class TestPageInput:
 
         if res.is_successful:
             with open(test_params.output_path + "page_input_text_element.pdf", "wb") as out_stream:
+                out_stream.write(res.content)
+
+        assert res.is_successful
+        
+    def test_page_dimension(self, pdf, test_params):
+        input1 = pdf.add_page()
+        text_element = TextElement("Hello World", ElementPlacement.TopCenter)
+        input1.elements.append(text_element)
+        
+        res = pdf.process()
+        
+        if res.is_successful:
+            with open(test_params.output_path + "page_dimension_pdfoutput.pdf", "wb") as out_stream:
                 out_stream.write(res.content)
 
         assert res.is_successful

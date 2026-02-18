@@ -18,8 +18,7 @@ class BarcodeElement(Element):
         '''
         return self._input_value
     
-    @value.setter
-    def value(self, input):
+    def _set_value(self, input):
         '''
         Sets the value of the barcode.
         '''

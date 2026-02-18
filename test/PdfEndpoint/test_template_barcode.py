@@ -45,14 +45,14 @@ class TestTemplateBarcodeElement:
         input1 = PageInput()
         templateA = Template("TemplateA")
 
-        element = AztecBarcodeElement("Hello World", ElementPlacement.BottomRight)
+        bytes_data = bytes([0x48, 0x45, 0x4C, 0x4C, 0x4F])
+        element = AztecBarcodeElement(bytes_data, ElementPlacement.BottomRight)
         element.symbol_size = AztecSymbolSize.R105xC105
         element.x_dimension = 3
         element.color = RgbColor.red()
         element.aztec_error_correction = 30
         element.process_tilde = True
         element.reader_initialization_symbol = True
-        element.value = "test123"
         element.x_offset = -100
         element.y_offset = -100
         templateA.elements.append(element)

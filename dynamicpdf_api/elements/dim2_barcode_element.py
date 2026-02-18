@@ -12,8 +12,7 @@ class Dim2BarcodeElement(BarcodeElement):
         if isinstance(value, str):
             super().__init__(value, placement, x_offset, y_offset)
         else:
+            encoded = base64.b64encode(value).decode('utf-8')
+            super().__init__(encoded, placement, x_offset, y_offset)
             self._value_type = ValueType.Base64EncodedBytes
-            self.value = base64.b64encode(value).decode('utf-8')
-            self.placement = placement
-            self.x_offset = x_offset
-            self.y_offset = y_offset
+          

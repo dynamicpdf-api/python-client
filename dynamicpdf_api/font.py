@@ -1,6 +1,7 @@
 import io
 import threading
 import os
+import sys
 import uuid
 from pathlib import Path
 from .full_name_table import FullNameTable
@@ -30,6 +31,44 @@ class Font:
     _lock_object = threading.Lock()
     _font_details = []
     _path_to_fonts_resource_directory = ""
+    
+    @staticmethod
+    def init():
+        try:
+            if sys.platform.startswith("win"):
+                windir = os.environ.get("WINDIR", r"C:\Windows")
+                path = os.path.join(windir, "Fonts")
+                if os.path.isdir(path):
+                    Font._path_to_fonts_resource_directory = path
+
+            elif sys.platform == "darwin":
+                home = os.environ.get("HOME")
+                paths = [
+                    "/System/Library/Fonts",
+                    "/Library/Fonts",
+                    os.path.join(home, "Library", "Fonts") if home else None
+                ]
+                for path in paths:
+                    if path and os.path.isdir(path):
+                        Font._path_to_fonts_resource_directory = path
+                        break
+
+            elif sys.platform.startswith("linux"):
+                home = os.environ.get("HOME")
+                paths = [
+                    "/usr/share/fonts",
+                    "/usr/local/share/fonts",
+                    os.path.join(home, ".fonts") if home else None,
+                    os.path.join(home, ".local", "share", "fonts") if home else None
+                ]
+                for path in paths:
+                    if path and os.path.isdir(path):
+                        Font._path_to_fonts_resource_directory = path
+                        break
+
+        except Exception as e:
+            print("Error in getting the font:", e)
+        
 
     def __init__(self, resource = None, resource_name = None):
         '''
@@ -309,13 +348,7 @@ class Font:
             if not Font._load_required:
                 return
             Font._load_required = False
-            if Font._path_to_fonts_resource_directory == "":
-                try:
-                    wind_dir = os.environ.get("WINDIR")
-                    if wind_dir is not None and len(wind_dir) > 0:
-                        Font._path_to_fonts_resource_directory = os.path.join(wind_dir, "Fonts")
-                except Exception:
-                    pass
+            Font.init()
 
             if Font._path_to_fonts_resource_directory and Font._path_to_fonts_resource_directory != "":
                 di = Path(Font._path_to_fonts_resource_directory)
